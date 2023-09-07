@@ -54,7 +54,7 @@ const UserList = () => {
                                         <tr>
                                             <td>
                                                 <img key={user.avatar} src={user.avatar} />
-                                                <p class="user-link">{user.first_name}</p>
+                                                <p class="user-link">{user.first_name} {user.last_name}</p>
                                             </td>
                                             <td>
                                                 <a href="#">{user.email}</a>

@@ -2,7 +2,7 @@ import React,{ useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import "./UserList.css";
 
-const UserList = () => {
+const UserList = (props) => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
@@ -45,19 +45,23 @@ const UserList = () => {
                                 <tr>
                                     <th><span>User</span></th>
                                     <th><span>Email</span></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                         {users &&
                             users.map((user) => {
                                 return (
-                                    <tbody>
+                                    <tbody key={user.id}> 
                                         <tr>
                                             <td>
                                                 <img key={user.avatar} src={user.avatar} />
-                                                <p class="user-link">{user.first_name}</p>
+                                                <p class="user-link">{user.first_name} {user.last_name}</p>
                                             </td>
                                             <td>
                                                 <a href="#">{user.email}</a>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-info" onClick={() => navigate(`/info/${user.id}`)}>Info</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -65,7 +69,7 @@ const UserList = () => {
                             })}
                                 </table>
                         </div>
-                        <nav aria-label="Page navigation example">
+                        <nav>
                             <ul class="pagination justify-content-end">
                                 <li class="page-item">
                                 <button class="page-link" href="#" aria-label="Previous" onClick={handlePrevPage} disabled={page == 1 ? "true" : ""}>
